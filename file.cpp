@@ -16,6 +16,7 @@ int main()
     vector<int> Message = toBinary(msg);    //msg in binary form
     string file;
     cout << "Enter the file name- " << '\n';
+    cin >> file ;
     ifstream inFile(file);
     if (!inFile)
     {
@@ -24,46 +25,31 @@ int main()
     int counter = 0;
     string format;
     string comment;
-    int width, height, maxVal;
+        int width, height, maxVal;
     inFile >> format;
     if (format != "P3")
     {
-        cout << "Unsupported PPM format" << endl;
-        return 1;
+      std::vector<unsigned char> ppmData = convertImg(file);
+         if (!ppmData.empty()) {
+            vector<int> newPPMdata(ppmData.begin() , ppmData.end())  ;          ///CONVERTS the unsigned char vector to int vector 
+        std::cout << "PPM conversion successful! Data size: " << ppmData.size() << " bytes\n";
+        furtherWorking(newPPMdata,Message) ;
+    } else {
+        std::cerr << "Failed to convert image.\n";
+    }
     }
     inFile >> format;
     while (inFile.peek() == '#')
     {
         getline(inFile, comment); // get the line and stores it in comment
     }
+
     vector<int> img;
     int pixel;
     while (inFile >> pixel)
     {
         img.push_back(pixel);
     }
-
-    for (int i = 0; i < img.size(); i += 3)
-    { 
-        int smallest=0 ;
-        vector<int> store; //to store the binary of the smallest value inside rgb values
-        for (int j = 0; j < 3; j++)
-        {
-            if(img[j] < smallest){
-                smallest = img[j] ;
-            }
-        }
-        while(smallest/2==0) //smallest no in rgb to binary
-        {
-            if (smallest%2==0){store.push_back(0) ;}
-            else{store.push_back(1) ;}
-            smallest = smallest/2 ;
-        } 
-        if(counter = Message.size()-1)
-        { store.pop_back();
-         store.push_back( Message[i] ) ;
-         counter++ ;
-        }
-
-    }
+//created a funct for simplification and optimization for both the ppdData and img vector`
+ furtherWorking(img , Message); 
 }
