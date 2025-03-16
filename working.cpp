@@ -51,4 +51,5 @@ vector<int> furtherWorking(vector<int> img, vector<int> Message)
         img[smallestIndex] = value ;
 
     }
+             return img;
 }

@@ -8,5 +8,6 @@ using namespace std;
 std::vector<int> toBinary(std::string msg){} 
 vector<unsigned char>convertImg(std::string &file){} 
 vector<int> furtherWorking(vector <int> img , vector<int> message){}
+int ppmToOther(vector<int>Output, FILE* pipe,  int width, int height){}
 
 #endif ;
