@@ -4,8 +4,8 @@
 #include <vector>
 #include <string>
 #include "cpp.h"
-#include <bin.cpp>
 #include<cstdio>
+
 
 using namespace std;
 
@@ -35,7 +35,7 @@ int main()
         inFile >> format >> height >> width >> maxVal;
     if (format != "P3")
     {
-      std::vector<unsigned char> ppmData = convertImg(file); //other to ppm
+      std::vector<unsigned char> ppmData = convertImg(file); //other to ppm but in unsigned char
          if (!ppmData.empty()) {
             vector<int> newPPMdata(ppmData.begin() , ppmData.end())  ;          ///CONVERTS the unsigned char vector to int vector 
         std::cout << "PPM conversion successful! Data size: " << ppmData.size() << " bytes\n";
@@ -43,7 +43,7 @@ int main()
     } else {
         std::cerr << "Failed to convert image.\n";
     }
-    }
+    } else{
     inFile >> format;
     
     int pixel;
@@ -51,6 +51,7 @@ int main()
     {
         img.push_back(pixel);
     }
+}
 //created a funct for simplification and optimization for both the ppdData and img vector`
  vector<int> Output = furtherWorking(img , Message); 
 if(format!="P3"){
