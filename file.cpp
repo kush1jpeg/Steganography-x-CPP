@@ -6,14 +6,13 @@
 #include "cpp.h"
 #include<cstdio>
 
-
 using namespace std;
 
 int main()
 {
     string msg;
     cout << "Enter the msg to be hidden- " << "\n";
-    cin >> msg;
+    getline( cin >>ws, msg);
     vector<int> Message = toBinary(msg);    //msg in binary form
     string file;
     cout << "Enter the file name- " << '\n';
@@ -32,7 +31,7 @@ int main()
         {
             getline(inFile, comment); // get the line and stores it in comment
         }
-        inFile >> format >> height >> width >> maxVal;
+        inFile >> format >> width >> height >> maxVal;
     if (format != "P3")
     {
       std::vector<unsigned char> ppmData = convertImg(file); //other to ppm but in unsigned char
@@ -55,14 +54,14 @@ int main()
 //created a funct for simplification and optimization for both the ppdData and img vector`
  vector<int> Output = furtherWorking(img , Message); 
 if(format!="P3"){
-  FILE* pipe = _popen("convert - output.jpg", "w");
+  FILE* pipe = _popen("magick - output.png", "w");// Using "-" as input means writing to stdi
     if (!pipe) {
         std::cerr << "Error: Failed to open pipe to ImageMagick\n";
         return 1;
     }
     int result= ppmToOther( Output ,pipe, width, height);
     if(result==0) {
-    std::cout << "Image saved as output.jpg" << std::endl;  
+    std::cout << "Image saved as output."+format<< std::endl;  
     }
     _pclose(pipe);
 

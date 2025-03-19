@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
-#include <bin.cpp>
+#include "cpp.h"
 
 vector<int> furtherWorking(vector<int> img, vector<int> Message)
 {

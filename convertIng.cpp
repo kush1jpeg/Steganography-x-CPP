@@ -1,23 +1,34 @@
-#include <cpp.h>
+#include "cpp.h"
 #include <iostream>
-using namespace std;
-#include <boost/process/system.hpp>
-#include <boost/process/io.hpp>
-
+#include <cstdio>  // For popen, fread
 #include <vector>
-vector<unsigned char> convertImg(string file){
- 
-    boost::process::ipstream pipe_stream;
-    // Capture output from ImageMagick
-    std::vector<unsigned char> ppmData;
-    boost::process::child process("magick " + file + " ppm:-", boost::process::std_out > pipe_stream);
-    // bp::child starts the ImageMagick cmd
-    // ppm:- tells ImageMagick to output the PPM data directly to stdout (instead of a file).
-    // bp::std_out > pipe_stream redirects this output into pipe_stream, so we can read it.    -> https://www.geeksforgeeks.org/pipe-system-call/?ref=ml_lbp
-    char ch;
-    while (pipe_stream.get(ch))
-    {
-        ppmData.push_back(ch);
+#include <string>
+#include <cstdio>  
+using namespace std;
+
+vector<unsigned char> convertImg(const string& file) {
+    vector<unsigned char> ppmData;
+    
+    // Command to run ImageMagick
+    string command = "magick " + file + " -compress none -depth 8 -colorspace RGB -define \"ppm:format=p3\" ppm:-";
+
+    
+    // Open a pipe to capture the output
+    FILE* pipe = popen(command.c_str(), "r");
+    if (!pipe) {
+        cerr << "Failed to open pipe!" << endl;
+        return ppmData;
     }
+
+    // wasnt able to do this so gpt's code this is
+    size_t bytesRead; //temporary storage area to hold the data read from the pipe.
+    char buffer[4096];
+    while ((bytesRead = fread(buffer, 1, sizeof(buffer), pipe)) > 0) {
+        ppmData.insert(ppmData.end(), buffer, buffer + bytesRead);//buffer + bytesRead ensures that only valid bytes are inserted (not garbage data from uninitialized memory).
+    }
+
+    // Close the pipe
+    pclose(pipe);
+    
     return ppmData;
 }
