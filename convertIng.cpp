@@ -3,14 +3,14 @@
 #include <cstdio>  // For popen, fread
 #include <vector>
 #include <string>
-#include <cstdio>  
+#include <cstdio> 
 using namespace std;
 
 vector<unsigned char> convertImg(const string& file) {
     vector<unsigned char> ppmData;
     
     // Command to run ImageMagick
-    string command = "magick " + file + " -compress none -depth 8 -colorspace RGB -define \"ppm:format=p3\" ppm:-";
+    string command = "magick " + file + " -compress none -depth 8 -colorspace RGB ppm:-";
 
     
     // Open a pipe to capture the output

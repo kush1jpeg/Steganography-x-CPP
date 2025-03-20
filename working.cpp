@@ -4,7 +4,8 @@
 #include <vector>
 #include <string>
 #include "cpp.h"
-
+#include <algorithm>
+using namespace std ;
 vector<int> furtherWorking(vector<int> img, vector<int> Message)
 {
     int counter = 0;
@@ -18,7 +19,7 @@ vector<int> furtherWorking(vector<int> img, vector<int> Message)
         {
             if (img[i + j] < smallest)
             {
-                smallest = img[j + i];
+                smallest = img[i+j];
                 smallestIndex = i+j ;
             }
         }
@@ -40,7 +41,7 @@ vector<int> furtherWorking(vector<int> img, vector<int> Message)
             store.push_back(Message[counter]);
             counter++;
         }
-
+reverse(store.begin(), store.end());
         // converting store to binary
         int value = 0;
         for (int i = 0; i < store.size(); i++)
@@ -50,5 +51,5 @@ vector<int> furtherWorking(vector<int> img, vector<int> Message)
         img[smallestIndex] = value ;
 
     }
-             return img;
+     return img;
 }

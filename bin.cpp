@@ -9,6 +9,7 @@ vector<int>toBinary(string msg)
     {
        int ascii = (int)ch; // Typecasting shitt basically
        Store.push_back(ascii) ;
+       cout << ascii ;
     }
     return Store ;
 }
