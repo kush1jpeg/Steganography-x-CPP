@@ -6,7 +6,7 @@
 #include "cpp.h"
 #include <algorithm>
 using namespace std ;
-vector<int> furtherWorking(vector<int> img, vector<int> Message)
+vector<int> furtherWorking(vector<int> &img, vector<int> Message)
 {
  int counter = 0;
 
@@ -22,11 +22,12 @@ vector<int> furtherWorking(vector<int> img, vector<int> Message)
             }
         }
 
-        if (smallestIndex != -1 && counter < Message.size()) {
+        if (counter < Message.size()) {
+            int newValue  = 0;
 // shoving the msg up the lsb's azz
 img[smallestIndex] = img[smallestIndex] - (img[smallestIndex] % 2);
-img[smallestIndex] += Message[counter];
-cout<< "index "<<smallestIndex<<"Actual value" << img[smallestIndex] << "messageBinary "<<Message[counter];
+newValue += Message[counter];
+img[smallestIndex] = newValue ;
             counter++;
         }
     }

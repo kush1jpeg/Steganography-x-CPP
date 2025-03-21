@@ -105,7 +105,5 @@ int main()
         }
     }
     Outfile.close();
-    
-
     return 0;
 }
