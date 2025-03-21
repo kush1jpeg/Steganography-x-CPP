@@ -89,7 +89,7 @@ int main()
     
     int result = ppmToOther(Output, pipe, width, height);
     if (result == 0) {
-        cout << "Image saved as output.png" << endl;
+       cout << "Image saved as output.png" << endl;
     }
     _pclose(pipe);
 

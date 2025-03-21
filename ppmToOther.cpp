@@ -8,7 +8,7 @@
 
 int ppmToOther(vector<int> Output, FILE* pipe, int width, int height) {
   cout << "height= " << height << " width= " << width << endl;
-  fprintf(pipe, "P6\n%d %d\n255\n", width, height);
+  fprintf(pipe, "P3\n%d %d\n255\n", width, height);
 
   vector<unsigned char> binaryOutput;
   for (int pixel : Output) {

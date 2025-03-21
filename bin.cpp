@@ -1,15 +1,28 @@
 #include "cpp.h"
 #include <iostream>
-using namespace std;
 #include <vector>
-vector<int>toBinary(string msg)
+using namespace std;
+
+vector<int> toBinary(string msg)
 {
-    vector<int>Store ;
-    for (char ch : msg)            //conversion of the character to binary 
-    {
-       int ascii = (int)ch; // Typecasting shitt basically
-       Store.push_back(ascii) ;
-       cout << ascii ;
+    vector<int> Store;
+ 
+    for (char ch : msg)    
+     {
+        vector<int> binary(8, 0);
+        for (int i = 7; i >= 0; i--)
+        {
+            binary[i] = ch % 2;
+            ch /= 2;
+        }
+
+        Store.insert(Store.end(), binary.begin(), binary.end());
+
+        cout << ch << " -> ";
+        for (int bit : binary)
+            cout << bit;
+        cout << endl;
     }
-    return Store ;
+
+    return Store;
 }
