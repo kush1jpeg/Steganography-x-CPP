@@ -9,12 +9,15 @@
 using namespace std;
 
 int main()
-{
+{     cout<<"Encrypt(e) or Decrypt(d)";
+            int e;
+            cin << e;
     vector<int> Output;
     string msg;
+    if(e=='e'){
     cout << "Enter the msg to be hidden- " << "\n";
     getline( cin >>ws, msg);
-    vector<int> Message = toBinary(msg);    //msg in binary form
+    vector<int> Message = toBinary(msg);}    //msg in binary form
     string file;
     cout << "Enter the file name- " << '\n';
     cin >> file;
@@ -61,6 +64,11 @@ int main()
         vector<unsigned char> ppmData = convertImg(ppmFile);
         if (!ppmData.empty()) {
             vector<int> newPPMdata(ppmData.begin(), ppmData.end());
+            if(e=='d')
+            {
+              Output = decryptWorking(newPPMdata) ; 
+              mssg(Output);
+            }
             Output = furtherWorking(newPPMdata, Message);
             cout << "PPM processing complete!" << endl;
         } else {
@@ -77,6 +85,7 @@ int main()
         while (inFile >> pixel) {
             img.push_back(pixel);
         }
+        std::cout << message;
         Output = furtherWorking(img, Message);
     }
 
@@ -94,6 +103,7 @@ int main()
     _pclose(pipe);
 
     // Save the processed image in PPM format as well
+    if(e=='e'){
     ofstream Outfile("output.ppm");
     Outfile << "P3\n" << width << " " << height << "\n255\n";
     
@@ -104,6 +114,6 @@ int main()
             Outfile << "\n";  
         }
     }
-    Outfile.close();
+    Outfile.close();}
     return 0;
 }
