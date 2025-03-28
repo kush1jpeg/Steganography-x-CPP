@@ -10,14 +10,15 @@ using namespace std;
 
 int main()
 {     cout<<"Encrypt(e) or Decrypt(d)";
-            int e;
-            cin << e;
-    vector<int> Output;
+            char e;
+            cin >> e;
+    vector<int> Output ;
+    vector<int> Message ;
     string msg;
     if(e=='e'){
     cout << "Enter the msg to be hidden- " << "\n";
     getline( cin >>ws, msg);
-    vector<int> Message = toBinary(msg);}    //msg in binary form
+    Message = toBinary( msg );}    //msg in binary form
     string file;
     cout << "Enter the file name- " << '\n';
     cin >> file;
@@ -43,7 +44,7 @@ int main()
         
         // Converting PNG/JPG to PPM 
         string ppmFile = "convertPPM.ppm";
-        string convertCmd = "magick " + file + " -compress none -depth 8 -colorspace sRGB -format ppm " + ppmFile;
+        string convertCmd = "magick " + file + " -compress none -depth 8 -colorspace RGB -define \"ppm:format=p3\" " + ppmFile;
         int status = system(convertCmd.c_str());
 
         if (status != 0) {
@@ -61,21 +62,25 @@ int main()
         ppmInFile >> format >> width >> height >> maxVal;
         cout << "Converted to PPM: Width = " << width << ", Height = " << height << ", Format = " << format << endl;
 
-        vector<unsigned char> ppmData = convertImg(ppmFile);
-        if (!ppmData.empty()) {
-            vector<int> newPPMdata(ppmData.begin(), ppmData.end());
+        if (!ppmFile.empty()) {
+             vector<int> img;
+        int pixel;
+        while (ppmInFile >> pixel) {
+            img.push_back(pixel);
+        }
             if(e=='d')
             {
-              Output = decryptWorking(newPPMdata) ; 
+              Output = decryptWorking(img) ; 
               mssg(Output);
+              
             }
-            Output = furtherWorking(newPPMdata, Message);
+            Output = furtherWorking(img, Message);
             cout << "PPM processing complete!" << endl;
         } else {
             cerr << "Failed to process converted PPM data!" << endl;
             return 1;
         }
-    } else {
+    }  else {
         // If the input file is already PPM (P3), process it directly
         inFile >> width >> height >> maxVal;
         cout << "Processing PPM: Width = " << width << ", Height = " << height << ", Format = " << format << endl;
@@ -85,35 +90,29 @@ int main()
         while (inFile >> pixel) {
             img.push_back(pixel);
         }
-        std::cout << message;
         Output = furtherWorking(img, Message);
     }
 
-    // Convert back to PNG
-    FILE* pipe = _popen("magick PPM:- output.png", "wb");
-    if (!pipe) {
-        cerr << "Error: Failed to open pipe to ImageMagick" << endl;
-        return 1;
-    }
-    
-    int result = ppmToOther(Output, pipe, width, height);
-    if (result == 0) {
-       cout << "Image saved as output.png" << endl;
-    }
-    _pclose(pipe);
-
     // Save the processed image in PPM format as well
-    if(e=='e'){
+    
     ofstream Outfile("output.ppm");
     Outfile << "P3\n" << width << " " << height << "\n255\n";
     
     for (int i = 0; i < Output.size(); i++) {
         Outfile << Output[i] << " ";  
-    
+        
         if ((i + 1) % (width * 3) == 0) {  
             Outfile << "\n";  
         }
     }
-    Outfile.close();}
+    Outfile.close();
+    // Convert back to PNG
+    if(e=='e'){
+    int result;
+    result = system("magick output.ppm output.png");
+    if (result == 0) {
+       cout << "Image saved as output.png" << endl;
+    }
+}
     return 0;
 }

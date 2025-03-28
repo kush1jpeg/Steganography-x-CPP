@@ -25,9 +25,12 @@ vector<int> furtherWorking(vector<int> &img, vector<int> Message)
         if (counter < Message.size()) {
             int newValue  = 0;
 // shoving the msg up the lsb's azz
-img[smallestIndex] = img[smallestIndex] - (img[smallestIndex] % 2);
-newValue += Message[counter];
-img[smallestIndex] = newValue ;
+cout << "value " << img[smallestIndex];
+// img[smallestIndex] = img[smallestIndex] - (img[smallestIndex] % 10);
+// newValue += Message[counter];
+// img[smallestIndex] += newValue ;
+img[smallestIndex] = (img[smallestIndex] / 10) * 10 + Message[counter];   //gpt said that it forces the value 0,1 
+cout << "newValue " << img[smallestIndex];
             counter++;
         }
     }
