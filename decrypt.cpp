@@ -27,6 +27,9 @@ vector<int> decryptWorking(vector<int> img) {
             break;
         }
     }
-
+    cout<< "checking the no vector - ";
+for(int n:no){
+    cout << n ;
+}
     return no;
 }

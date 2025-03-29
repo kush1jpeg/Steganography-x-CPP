@@ -75,7 +75,6 @@ int main()
               
             }
             Output = furtherWorking(img, Message);
-            cout << "PPM processing complete!" << endl;
         } else {
             cerr << "Failed to process converted PPM data!" << endl;
             return 1;

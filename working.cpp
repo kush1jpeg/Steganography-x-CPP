@@ -6,9 +6,14 @@
 #include "cpp.h"
 #include <algorithm>
 using namespace std ;
-vector<int> furtherWorking(vector<int> &img, vector<int> Message)
+vector<int> furtherWorking(vector<int> &img, vector<int> &Message)
 {
  int counter = 0;
+
+   for (int i = 0; i < 8; i++) {
+        Message.push_back(0);
+    }                            //terminator logic to identify that the message has ended basically exit the
+                                //decryption whenver you encounter eight 0 next to each other  
 
     for (int i = 0; i < img.size(); i += 3) {
         int smallest = 255;
