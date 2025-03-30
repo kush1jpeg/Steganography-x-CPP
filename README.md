@@ -1,6 +1,6 @@
 # Steganography-x-CPP
 
-A cool terminal-based steganography tool written in C++ that hides messages inside images using the Least Significant Bit (LSB) technique though frucks up the image little bit:)
+A cool terminal-based steganography tool inspired by the famous Cicada 3301, the mysterious internet puzzle that appeared in 2012 :Some images posted by Cicada contained hidden messages that could only be revealed through steganographic techniques; written in C++ this project hides messages inside images using the Least Significant Bit (LSB) technique though frucks up the image little bit:)
 
 ## 🚀 Features
 - Encode a secret message into an image
@@ -10,7 +10,7 @@ A cool terminal-based steganography tool written in C++ that hides messages insi
 ## 📌 Prerequisites
 Before using the tool, ensure you have the following installed:
 
-- **G++ Compiler** (for compiling the C++ code)
+- **G++ Compiler (or any other)** (for compiling the C++ code)
 - **ImageMagick** (for converting images to PPM format)
 
 ### 🎯 Install ImageMagick

@@ -17,7 +17,7 @@ vector<int> decryptWorking(vector<int> img) {
             }
         }
 
-        cout << "Pixel Value: " << small << ", Extracted Bit: " << (small % 10) << endl; // Debugging line
+       // cout << "Pixel Value: " << small << ", Extracted Bit: " << (small % 10) << endl;  fr debug
 
         int bit = small % 10;
         if (bit == 0 || bit == 1) {

@@ -9,11 +9,9 @@ using namespace std;
 vector<unsigned char> convertImg(const string& file) {
     vector<unsigned char> ppmData;
     
-    // Command to run ImageMagick
-    string command = "magick " + file + " -compress none -depth 8 -colorspace RGB  ppm:-";
+    string command = "magick " + file + " -compress none -depth 8 -colorspace RGB -strip ppm:-";
 
     
-    // Open a pipe to capture the output
     FILE* pipe = popen(command.c_str(), "r");
     if (!pipe) {
         cerr << "Failed to open pipe!" << endl;
