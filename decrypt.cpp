@@ -23,13 +23,14 @@ vector<int> decryptWorking(vector<int> img) {
         if (bit == 0 || bit == 1) {
             no.push_back(bit);
         } else {
-            cout << "Stopped at invalid bit: " << bit << endl;
+            cout << "\033[3;34mStopped at invalid bit: " << bit << endl;
             break;
         }
     }
     cout<< "checking the no vector - ";
 for(int n:no){
-    cout << n ;
+    cout <<"\033[1;34m"<< n ;
 }
+cout << "\n";
     return no;
 }
