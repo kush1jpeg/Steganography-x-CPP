@@ -1,23 +1,22 @@
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <vector>
-#include <string>
-#include "cpp.h"
+// #include <iostream>
+// #include <fstream>
+// #include <cstdlib>
+// #include <vector>
+// #include <string>
+// #include "cpp.h"
 
 
-int ppmToOther(vector<int> Output, FILE* pipe, int width, int height) {
-  cout << "height= " << height << " width= " << width << endl;
-  fprintf(pipe, "P3\n%d %d\n255\n", width, height);
+// int ppmToOther(vector<int> Output, FILE* pipe, int width, int height) {
+//   cout << "height= " << height << " width= " << width << endl;
+//   fprintf(pipe, "P3\n%d %d\n255\n", width, height);
 
-  vector<unsigned char> binaryOutput;
-  for (int pixel : Output) {
-      binaryOutput.push_back(static_cast<unsigned char>(pixel));
-  }
+//   vector<unsigned char> binaryOutput;
+//   for (int pixel : Output) {
+//       binaryOutput.push_back(static_cast<unsigned char>(pixel));
+//   }
 
-  fwrite(binaryOutput.data(), 1, binaryOutput.size(), pipe);
-  fflush(pipe);
-  pclose(pipe);
+//   fwrite(binaryOutput.data(), 1, binaryOutput.size(), pipe);
+//   pclose(pipe);
 
-  return 0;
-}
+//   return 0;
+// }
