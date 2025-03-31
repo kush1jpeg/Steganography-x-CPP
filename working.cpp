@@ -8,6 +8,7 @@
 using namespace std ;
 vector<int> furtherWorking(vector<int> &img, vector<int> &Message)
 {
+    cout <<"\033[3;34mBeginning the encryption ..... \033[0m"<<"\n" ;
  int counter = 0;  
  int j = Message.back() == 0? j = 0 : j = 1 ;
    for (int i = 0 ; i < 8 ; i++) {
@@ -30,15 +31,19 @@ vector<int> furtherWorking(vector<int> &img, vector<int> &Message)
         if (counter < Message.size()) {
             int newValue  = 0;
 // shoving the msg up the lsb's azz
-cout << "value " << img[smallestIndex];
+cout << "\033[3;34mValue " << img[smallestIndex] << " ------------> " ;
 // img[smallestIndex] = img[smallestIndex] - (img[smallestIndex] % 10);
 // newValue += Message[counter];
 // img[smallestIndex] += newValue ;
-img[smallestIndex] = (img[smallestIndex] / 10) * 10 + Message[counter];   //gpt said that it forces the value 0,1 
-cout << "newValue " << img[smallestIndex];
+//or
+img[smallestIndex] = (img[smallestIndex] / 10) * 10 + Message[counter];  //gpt's so short bruh
+cout << "\033[3;34m newValue " << img[smallestIndex] << "\033[0m\n";
             counter++;
         }
     }
-    cout << "\n" << "Processing the image" << "\n";
+    cout <<"\033[3;34mEncryption completed \033[0m" << "\n";
+    cout <<endl ;
+    cout <<"\033[0;33m......  Processing the image  ......\033[0m" << "\n";
+    cout <<endl ;
     return img;
 }
