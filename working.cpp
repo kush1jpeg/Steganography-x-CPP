@@ -10,7 +10,7 @@ vector<int> furtherWorking(vector<int> &img, vector<int> &Message)
 {
     cout <<"\033[3;34mBeginning the encryption ..... \033[0m"<<"\n" ;
  int counter = 0;  
- int j = Message.back() == 0? j = 0 : j = 1 ;
+ int j = Message.back() == 0? j = 1 : j = 0 ;
    for (int i = 0 ; i < 8 ; i++) {
         Message.push_back(j);
     }                            //terminator logic to identify that the message has ended basically exit the

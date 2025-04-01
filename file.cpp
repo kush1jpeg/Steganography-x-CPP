@@ -13,7 +13,7 @@ using namespace std;
 int main()
 {
     cout << "\033[1;31m" << u8R"(  
- _____ _               _       ____ 
+  _____ _               _       ____ 
  / ____(_)             | |     |___ \
 | |     _  ___ __ _  __| | __ _  __) |
 | |    | |/ __/ _` |/ _` |/ _` ||__ <  
@@ -95,7 +95,8 @@ cout << "\033[2;32m"
 
         ppmInFile >> format >> width >> height >> maxVal;
         cout << "\033[0;33m** Converted " << file << " to PPM: Width = " << width << ", Height = " << height << ", Format = " << format << "  **\n\033[0m" << endl;
-        int pass = (width + height)/maxVal + ceil(file.length() / 2 ) ; 
+        int pass = ceil(((width))% 395 + 1) ; 
+        cout << "PASSWORD    -" << pass ;
         if (e == 'e')
         {
             cout << "\n\033[1;32mEnter the msg to be hidden: \033[0m";
@@ -146,7 +147,8 @@ cout << "\033[2;32m"
     {
         inFile >> width >> height >> maxVal;
         cout << "\033[2;33mProcessing PPM: Width = " << width << ", Height = " << height << ", Format = " << format << "\033[0m" << endl;
-        int pass = (width + height)/maxVal + ceil(file.length() / 2 ) ; 
+        int pass = ceil(((width+height))% 195 + 2) ; 
+       // cout << "PASSWORD    -"  <<pass ;
         vector<int> img;
         int pixel;
         while (inFile >> pixel)
