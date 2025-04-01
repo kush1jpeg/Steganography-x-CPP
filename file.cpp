@@ -96,7 +96,7 @@ cout << "\033[2;32m"
         ppmInFile >> format >> width >> height >> maxVal;
         cout << "\033[0;33m** Converted " << file << " to PPM: Width = " << width << ", Height = " << height << ", Format = " << format << "  **\n\033[0m" << endl;
         int pass = ceil(((width))% 395 + 1) ; 
-        cout << "PASSWORD    -" << pass ;
+        // cout << "PASSWORD    -" << pass ;
         if (e == 'e')
         {
             cout << "\n\033[1;32mEnter the msg to be hidden: \033[0m";
