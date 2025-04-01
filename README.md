@@ -61,7 +61,7 @@ cd Steganography-x-CPP
 ### Compile all the files using the compiler-
 for gcc-
 ```sh
-g++ file.cpp bin.cpp working.cpp msg.cpp decrypt.cpp -o output.exe
+g++ file.cpp bin.cpp working.cpp msg.cpp decrypt.cpp xor.cpp -o output.exe
 ```
 //for windows output.exe file will be formed and on linux simply output file will be formed
 
@@ -85,6 +85,9 @@ Run the output file:
 ## Contributing
 Feel free to contribute by submitting issues or pull requests or some improvements  
 
-## Future Plans + Learning 
-I can still first encrypt the message using some algo -> wat i am thinking is to generate a passkey by hashing some of the meta data from the image and then encrypt the message and then store it inside the image in the form of binaries so it would almost be unbreakable(not literally but very secure as a matter of fact). I will definitely do it cuz you know as i have already used Caesar-Cipher algo before for my file Encryptor and Decryptor project so it will be easy for me ahmm i yapped too much. also i still have to figure out how to work with pipes in cpp cuz i know jackshit about them and eventually had to remove the whole func which used pipe and write it by creating files like a pu$y;
+# Future Plans + Learning 🌟
+I’m thinking of first encrypting the message using an algorithm. What I have in mind is generating a passkey by hashing some of the metadata from the image, then encrypting the message and storing it inside the image as binary data. This way, it would be almost unbreakable (well, not literally, but very secure 😎). I’m definitely going to do this since I've already used the Caesar Cipher algorithm in my File Encryptor and Decryptor project, so it should be easy for me. Ahh, I’ve yapped too much 😅.
 
+Also, I still need to figure out how to work with pipes in C++, because I honestly know jack-shit about them and had to remove the whole function that used pipes and rewrite it by uk creating files like a p$y🐱.
+
+Edit: I’ve done some basic encryption on the message being inputted before converting it into binary using XOR. Now, I really want to implement SHA-256. However, making it from scratch would complicate the project unnecessarily, and I don’t want to use any fucking crappy library just to get the job done;

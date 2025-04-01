@@ -7,7 +7,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <cctype>
-
+#include <cmath>
 using namespace std;
 
 int main()
@@ -43,19 +43,12 @@ cout << "\033[2;32m"
     vector<int> Output;
     vector<int> Message;
     string msg;
-
-    if (e == 'e')
-    {
-        cout << "\n\033[1;32mEnter the msg to be hidden: \033[0m";
-        getline(cin >> ws, msg);
-        Message = toBinary(msg); // Convert msg to binary
-    }
-
     string file;
     cout << "\n\033[1;32mEnter the file name: \033[0m";
     cin >> file;
-
+    cin.ignore();  // Ignore leftover newline character
     ifstream inFile(file);
+    cout << "Trying to open the file"  ;
     if (!inFile)
     {
         cerr << "\033[0;35mError: File does not exist or cannot be opened! \033[0m" << endl;
@@ -102,7 +95,15 @@ cout << "\033[2;32m"
 
         ppmInFile >> format >> width >> height >> maxVal;
         cout << "\033[0;33m** Converted " << file << " to PPM: Width = " << width << ", Height = " << height << ", Format = " << format << "  **\n\033[0m" << endl;
-
+        int pass = (width + height)/maxVal + ceil(file.length() / 2 ) ; 
+        if (e == 'e')
+        {
+            cout << "\n\033[1;32mEnter the msg to be hidden: \033[0m";
+            getline(cin >> ws, msg);
+            cout << "\033[0;33m Beginning the XOR-encryption \033[0m" << endl ;
+            string msgg = xorEncrypt(msg , pass) ;
+            Message = toBinary(msgg); // Convert msg to binary
+        }    
         if (!ppmFile.empty())
         {
             vector<int> img;
@@ -113,13 +114,9 @@ cout << "\033[2;32m"
             }
             if (e == 'd')
             {
-                string msggg;
                 Output = decryptWorking(img);
-                vector<char> Decrypted = mssg(Output);
-                for (char ch : Decrypted)
-                {
-                    msggg += ch;
-                }
+                vector<char> encDecrypted = mssg(Output);
+                string Decrypted = xorDecrypt(encDecrypted , pass);
                 ppmInFile.close();
                 cout<<"\033[3;34mRemoving temp files..... \n";
             remove("convertPPM.ppm");
@@ -133,7 +130,7 @@ cout << "\033[2;32m"
                 }
                 cout << "\033[3;31m The message decrypted is - \033[0m\n";
                 cout << "\033[2;31m      =====================================\033[0m\n";
-                cout << "🗝️ \033[1;31m **       " + msggg + "      **\033[0m 🗝️" << endl;
+                cout << "🗝️ \033[1;31m **       " + Decrypted + "      **\033[0m 🗝️" << endl;
                 cout << "\033[2;31m===================================\033[0m";
                 return 0;
             }
@@ -149,13 +146,15 @@ cout << "\033[2;32m"
     {
         inFile >> width >> height >> maxVal;
         cout << "\033[2;33mProcessing PPM: Width = " << width << ", Height = " << height << ", Format = " << format << "\033[0m" << endl;
-
+        int pass = (width + height)/maxVal + ceil(file.length() / 2 ) ; 
         vector<int> img;
         int pixel;
         while (inFile >> pixel)
         {
             img.push_back(pixel);
         }
+        string msgg = xorEncrypt(msg , pass) ;
+        Message = toBinary(msgg); // Convert msg to binary
         Output = furtherWorking(img, Message);
     }
 
